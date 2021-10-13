@@ -2,7 +2,7 @@
 def get_prim(p):
     '''Verifica daca numarul este prim
     :param :p intreg
-    :return: True daca este prim sau False daca nu
+    :return: 1 daca este prim sau 0 daca nu
     '''
     if p<2:
         return 0
@@ -22,7 +22,7 @@ def get_longest_all_primes(lst):
     '''
     Determinarea secventa cea mai lunga cu prop ca nr sunt prime
     :param lst: lista de nr intregi
-    :return: rez lista care reprezinta secventa de lungime maxima
+    :return: rez : lista care reprezinta secventa de lungime maxima
     cu prop ca nr sunt prime
     '''
     rez = []  # rezultatul final
@@ -69,7 +69,8 @@ def test_get_cif_prim():
 def get_longest_prime_digits(lst):
     '''Determina secventa cea mai lunga cu proprietatea ca toate cifrele numerelor sunt pime
     :param: lst
-    :return: rez :lista cu proprietatea anuntata mai sus'''
+    :return: rez :lista numerelor cu proprietatea anuntata mai sus
+    '''
     rez = []  # rezultatul final
     temp = []  # solutia curenta
     for x in lst:  # foreach
@@ -89,12 +90,38 @@ def test_get_longest_prime_digits():
     assert get_longest_prime_digits([23,235,35,4,12,35])==[23,235,35]
     assert get_longest_prime_digits([77,23,65,55])==[77,23]
 
+
+#problema 10
+def  get_longest_all_even(lst):
+    '''Determina secventa cea mai lunga cu proprietatea ca toate numerele sunt pare
+    :param: lst: lista de nr intregi
+    :return: rez: lista numerelor cu proprietatea anuntata mai sus'''
+    rez = []  # rezultatul final
+    temp = []  # solutia curenta
+    for x in lst:
+        if x%2==0:
+            temp.append(x)
+        else:
+            if (len(temp) > len(rez)):
+                rez = temp[:]
+            temp.clear()
+    if (len(temp) > len(rez)):
+        rez = temp[:]
+    return rez
+
+
+def test_get_longest_all_even():
+    assert get_longest_all_even([2,4,6,11])==[2,4,6]
+    assert get_longest_all_even([1,3,2,8,0])==[2,8,0]
+
+
 def meniu():
     print("""
 1.Citire date
 2.Determinarea celei mai lungi secvente cu proprietatea de la pb 2
-3.Determinarea celei mai lungi secvente cu proprietatea de la pb 18
-4.Iesire""")
+3.Determinarea celei mai lungi secvente cu proprietatea de la pb 13
+4.Determinarea celei mai lungi secvente cu proprietatea de la pb 10
+5.Iesire""")
 
 
 def citire(n):
@@ -110,6 +137,7 @@ def teste():
     test_get_cif_prim()
     test_get_longest_all_primes()
     test_get_longest_prime_digits()
+    test_get_longest_all_even()
 
 
 def main():
@@ -126,6 +154,8 @@ def main():
         elif cmd==3:
             print(get_longest_prime_digits(lst))
         elif cmd==4:
+            print(get_longest_all_even(lst))
+        elif cmd==5:
             break
         else:
             print("comanda invalida")
